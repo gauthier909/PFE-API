@@ -10,8 +10,7 @@ const db = require('./utils/db')
 require('dotenv').config()
 
 const routerEnfant = require('./routes/enfant')
-const routerProfessionnel = require('./routes/professionnel')
-const routerResponsable = require('./routes/responsable')
+const routerPersonne = require('./routes/personne')
 const routerDefault = require('./routes/default')
 
 app.use(cors())
@@ -21,8 +20,7 @@ const constants = require("./models/modelJeux")
 db.connect()
 
 app.use('/enfant', routerEnfant)
-app.use('/professionnel', routerProfessionnel)
-app.use('/responsable', routerResponsable)
+app.use('/personne', routerPersonne)
 
 io.on('test', (socket) => {
     console.log("Responding to test channel")
