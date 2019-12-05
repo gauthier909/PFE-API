@@ -6,19 +6,21 @@ const proxy = require('http-proxy-middleware')
 const cors = require('cors')
 const router = express.Router()
 const io = require('socket.io')(8081)
+const db = require('./utils/db')
+require('dotenv').config()
 
 const routerEnfant = require('./routes/enfant')
-const routerProfessionnel = require('./routes/professionnel')
-const routerResponsable = require('./routes/responsable')
+const routerPersonne = require('./routes/personne')
 const routerDefault = require('./routes/default')
-
-// app.use(proxy({target: "http://localhost:4200", secure: false}))
 
 app.use(cors())
 
+const constants = require("./models/modelJeux")
+
+db.connect()
+
 app.use('/enfant', routerEnfant)
-app.use('/professionnel', routerProfessionnel)
-app.use('/responsable', routerResponsable)
+app.use('/personne', routerPersonne)
 
 io.on('test', (socket) => {
     console.log("Responding to test channel")

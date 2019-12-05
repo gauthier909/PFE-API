@@ -1,5 +1,6 @@
 const mongodb = require('mongodb')
 const MongoClient = mongodb.MongoClient
+require('dotenv').config()
 
 const url = "mongodb+srv://gabriel:gabygab11@web3-mn3ae.gcp.mongodb.net/test?retryWrites=true&w=majority"
 const dbName = "PFE-DB"

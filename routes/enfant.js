@@ -2,26 +2,25 @@ const express = require('express')
 const router = express.Router()
 const db = require('../utils/db')
 
-router.get('/', () => {
-    console.log("insertion");
-    let collection = db.mongo.collection("images");
-    collection.insertOne({
-        nom:"./images/deplacements/bus.jpg",
-        categorie:"deplacements"
-    });
+
+// /api/enfant/
+// Find all enfants
+router.get('/', (req, res) => {
+    db.mongo
+    .collection("enfants")
+    .find()
+    .toArray()
+    .then(enfants => {
+      res.json(enfants);
+    }).catch((err) => {
+		res.status(500).send(err)
+	});
 })
 
+
+// /api/enfant/jeu
 router.get('/jeu', () => {
     
 })
-
-router.get('/images', function(req,res,next) {
-    db.db.collection('images').find().toArray().then((images)=>{
-        res.json(images);
-        console.log(images);
-    }).catch((err)=>{
-        res.status(500).send(err);
-    });
-});
 
 module.exports = router
