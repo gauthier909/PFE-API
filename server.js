@@ -12,6 +12,7 @@ require('dotenv').config()
 const routerEnfant = require('./routes/enfant')
 const routerPersonne = require('./routes/personne')
 const routerDefault = require('./routes/default')
+const routerPartie = require('./routes/partie')
 
 app.use(cors())
 
@@ -21,6 +22,7 @@ db.connect()
 
 app.use('/enfant', routerEnfant)
 app.use('/personne', routerPersonne)
+app.use('/partie', routerPartie)
 
 io.on('test', (socket) => {
     console.log("Responding to test channel")
