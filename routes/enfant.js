@@ -1,11 +1,20 @@
 const express = require('express')
 const router = express.Router()
+const db = require('../utils/db')
 
-router.get('/enfants', () => {
-    console.log('Recieved message about enfants')
-    res.json("Les enfants")
+// /api/enfant/
+router.get('/', (req, res) => {
+    db.mongo
+    .collection("enfants")
+    .findOne()
+    .then(enfant => {
+      res.json(enfant);
+    })
+
+
 })
 
+// /api/enfant/jeu
 router.get('/jeu', () => {
     
 })
