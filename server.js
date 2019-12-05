@@ -27,9 +27,16 @@ io.on('test', (socket) => {
 
 io.on('connection', (socket) => {
     console.log("Connection established", socket.id)
-    socket.on('chat', (data) => {
-        console.log("Sur le channet chat on a recu :", data)
-        socket.emit('chat', {message : "Welcome back !"})
+    socket.join('room1', () => {
+        let rooms = Object.keys(socket.rooms)
+        console.log("ROOMS ! ", rooms, socket.rooms)
+    })
+    socket.in('room1').on('chat', (data) => {
+        console.log("Sur le channet chat de room1 on a recu :", data)
+        socket.to("room1").emit('chat', data)
+    })
+    socket.on('disconnect', () => {
+        console.log("A useRRRR disconnected : ", socket.id)
     })
 })
 
