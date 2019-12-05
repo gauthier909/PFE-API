@@ -1,8 +1,8 @@
 const mongodb = require('mongodb')
 const MongoClient = mongodb.MongoClient
 
-const url = process.env.MONGODB_URI
-const dbName = process.env.MONGO_DB
+const url = "mongodb+srv://gabriel:gabygab11@web3-mn3ae.gcp.mongodb.net/test?retryWrites=true&w=majority"
+const dbName = "PFE-DB"
 
 let connect = () => {
     return new Promise((resolve, reject) => {
