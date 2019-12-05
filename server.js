@@ -12,6 +12,8 @@ const routerProfessionnel = require('./routes/professionnel')
 const routerResponsable = require('./routes/responsable')
 const routerDefault = require('./routes/default')
 
+
+
 // app.use(proxy({target: "http://localhost:4200", secure: false}))
 
 app.use(cors())
