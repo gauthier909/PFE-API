@@ -40,7 +40,7 @@ io.on('connection', (socket) => {
         socket.to("room1").emit('chat', data)
     })
     socket.on('disconnect', () => {
-        console.log("A useRRRR disconnected : ", socket.id)
+        console.log("A user disconnected : ", socket.id)
     })
 })
 
