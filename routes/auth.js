@@ -10,7 +10,7 @@ router.post("/auth/login", function(req, res, next) {
     console.log(req.body);
     db.mongo.collection("personnes").findOne({ email: req.body.email }).then(user => {
         if (user) {
-            console.log("my request "+req.body);
+            console.log("my request "+req.body.password);
                 console.log(user+"mon user")
             if(crypt.decryptPassword(user.password)==req.body.password) {
 
