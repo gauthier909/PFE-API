@@ -6,12 +6,12 @@ const bodyParser= require('body-parser')
 const crypt = require('../middlewares/crypt')
 const jwt = require('jsonwebtoken')
 require('dotenv').config()
-router.post("/login", function(req, res, next) {
+router.post("/auth/login", function(req, res, next) {
     console.log(req.body);
     db.mongo.collection("personnes").findOne({ email: req.body.email }).then(user => {
-        console.log("decription "+crypt.decryptPassword(user.password))
         if (user) {
-
+            console.log("my request "+req.body);
+                console.log(user+"mon user")
             if(crypt.decryptPassword(user.password)==req.body.password) {
 
                     console.log("might get there")

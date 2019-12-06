@@ -1,17 +1,16 @@
-const Cryptr = require('Cryptr')
-const cryptr = new Cryptr('totalyObvious')
+const Crypt = require('5no-crypt')
 
 const cryptPassword = (password) => { 
-    const digest = cryptr.encrypt(password)
+    const digest = Crypt(password,'0.nc5.09213').encrypt(password)
 
     console.log("Password crypted: ", digest)
     return digest
 }
 
 const decryptPassword = (digest) => {
-    console.log("Password crypted: ", digest)
-    const password = cryptr.decrypt(digest)
-    console.log("Password crypted: ", password)
+    console.log("Password TODEcrypted: ", digest)
+    const password = Crypt(digest,'0.nc5.09213').decrypt(digest)
+    console.log("Password DEcrypted: ", password)
     return password
 }
 
