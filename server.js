@@ -7,7 +7,7 @@ const cors = require('cors')
 const router = express.Router()
 const io = require('socket.io')(8081)
 const db = require('./utils/db')
-require('dotenv').config()
+require('dotenv').config() 
 
 const routerEnfant = require('./routes/enfant')
 const routerPersonne = require('./routes/personne')
