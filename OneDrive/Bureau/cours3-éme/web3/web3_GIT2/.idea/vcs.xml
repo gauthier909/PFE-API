@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project version="4">
-  <component name="VcsDirectoryMappings">
-    <mapping directory="$PROJECT_DIR$/web3-2019-api" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/web3-2019-apiS3" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/web3-2019-webapp" vcs="Git" />
-  </component>
-</project>
