@@ -1,9 +1,10 @@
 const jwt = require('jsonwebtoken')
 const db = require('../utils/db')
-
+const _ =  require('lodash')
+const router = require('express').Router()
 const jwtSecret = process.env.JWT_SECRET
 const collectionName = process.env.COLLECTION_NAME
-
+const crypt = require('./crypt')
 const authMiddleware = (req, res, next) => {
     var token = req.get('authorization')
     if (!token) {
@@ -24,9 +25,9 @@ const authMiddleware = (req, res, next) => {
                     error: "Token has expired >.<"
                 })
             } else {
-                db.mongo.collection(constants.).findOne({
-                        _id: new db.ObjectID(decoded.user)
-                    })
+                db.mongo.collection(collectionName).findOne({ // CHNAGERRRRRRRR
+                    _id: new db.ObjectID(decoded.user)
+                })
                     .then(user => {
                         if(err || !user){
                             res.status(500).send(err)
@@ -41,3 +42,7 @@ const authMiddleware = (req, res, next) => {
         })
     }
 }
+
+
+
+exports.AuthMiddleware=authMiddleware;
