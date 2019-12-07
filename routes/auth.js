@@ -1,7 +1,7 @@
 const app=require('express')
 const router=app.Router()
 const _ =  require('lodash')
-const db = require('../utils/db')
+const db = require('../modules/db')
 const bodyParser= require('body-parser')
 const crypt = require('../middlewares/crypt')
 const jwt = require('jsonwebtoken')
