@@ -23,8 +23,9 @@ db.connect()
             if (res === 0) {
                 console.log('Inserting a default user')
                 let password = crypt.cryptPassword(constants.TABLE_PERSONNES_PASSWORD_ADMIN)
+                let user = constants.TABLE_PERSONNES_USER_ADMIN
                 collection.insertOne({
-                    user: 'pika',
+                    user: user,
                     password: password
                 }).catch(err => {
                     console.error("[APP] Unable to insert default user")
