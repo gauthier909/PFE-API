@@ -15,6 +15,7 @@ const routerEnfant = require('../routes/enfant')
 const routerPersonne = require('../routes/personne')
 const routerDefault = require('../routes/default')
 const routerPartie = require('../routes/partie')
+const routerCategorie = require('../routes/categories')
 
 /**
  * Variables
@@ -33,6 +34,7 @@ app.use('/', routerAuth)
 app.use('/enfants', routerEnfant)
 app.use('/personne', routerPersonne)
 app.use('/partie', routerPartie)
+app.use('/categories', routerCategorie)
 
 // io.on('test', (socket) => {
 //     console.log("Responding to test channel")
