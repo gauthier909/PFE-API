@@ -33,7 +33,6 @@ router.get('/:id', (req, res) => {
 });
 })
 
-// { $set: { status: "Modified", comments: [ "$misc1", "$misc2" ] } },
 
 // Update an infant by ID
 router.put('/:id', function(req, res) {
@@ -55,9 +54,23 @@ router.put('/:id', function(req, res) {
 	});
 });
 
-
-
-
+// Delete an infant by ID
+router.delete('/:id', function(req, res) {
+  console.log("message delete reçu")
+  console.log(req.body._id)
+	db.mongo
+  .collection("enfants")
+  .findOneAndDelete({_id: new db.ObjectID(req.params.id)})
+  .then((result) => {
+		if (result.value) {
+			res.json(result.value)
+		} else {
+			res.status(404).send()
+		}
+	}).catch((err) => {
+		res.status(500).send(err)
+	});
+});
 
 // /api/enfant/jeu
 router.get('/jeu', () => {
