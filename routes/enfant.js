@@ -18,6 +18,19 @@ router.get('/', (req, res) => {
 	});
 })
 
+// /api/enfant/
+// Find all enfants
+router.post('/', (req, res) => {
+  console.log("message on veut insert reçu")
+  db.mongo.collection("enfants").insertOne(req.body).then((result) =>{
+    req.body._id = result.insertedId
+    res.json(req.body)
+  }).catch((err) => {
+    res.status(500).send(err)
+  });
+});
+
+
 /* 
 find an infant by id
 */
