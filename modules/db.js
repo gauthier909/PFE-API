@@ -7,7 +7,6 @@ const dbName = process.env.MONGO_DB
 
 let connect = () => {
     return new Promise((resolve, reject) => {
-        console.log("Voici nos identifiants: ", url, dbName)
         const client = new MongoClient(url, {
             useUnifiedTopology: true,
             useNewUrlParser: true

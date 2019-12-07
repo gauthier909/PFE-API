@@ -12,40 +12,8 @@ const db = require('./modules/db')
 const server = require('./modules/server')
 const constants = require('./utils/constants')
 const crypt = require('./middlewares/crypt')
-const fs = require('fs')
+const dbImages = require('./utils/dbImages')
 
-
-const checkImages = () => {
-    let categories = []
-    console.log("Dans check images")
-    return new Promise((resolve, request) => {
-        fs.readdir('./images', (err, dirs) => {
-            dirs.forEach(dir => {
-                let images = []
-                path = './images/' + dir
-                fs.readdir('./images/' + dir, (err, file) => {
-                    let cat = {}
-                    cat.categorie = dir
-                    cat.src = path
-                    cat.images = file
-                    categories.push(cat)
-                })
-                console.log("et la  ? ", categories)
-
-            })
-            console.log("Mtn ? ", categories)
-            resolve(categories)
-        })
-    })
-}
-
-const readDir = (path) => {
-    return new Promise((resolve, reject) => {
-        fs.readdir(path, (err, data) => {
-            resolve(data)
-        })
-    })
-}
 
 db.connect()
     .then(db => {
@@ -65,46 +33,8 @@ db.connect()
         })
 
         /**
-         * On ajoute les idées des images dans mongoDB
+         * On ajoute les images dans mongoDB
          */
-        let images
-        const run = async () => {
-            let cats = []
-            let categories = await readDir('./images')
-            for (let i = 0; i < categories.length; i++) {
-                let abc = await readDir('./images/' + categories[i])
-                let element = './images/' + categories[i]
-                cats.push({
-                    categorie: categories[i],
-                    path: './images/' + categories[i] + '/',
-                    images: abc
-                })
-            }
-            images = cats
-        }
-        run()
-            .then(() => {
-                // console.log(images)
-                images.forEach(element => {
-                    element.images.forEach(image => {
-                        let el = db.collection('images')
-                        .find({
-                            nom: element.path+image
-                        }).toArray().then(arr => {
-                            if(arr.length === 1){
-                                if(arr[0].nom === element.path+image){
-                                    console.log("C'est ok")
-                                }else{
-                                    console.log("pas ok ?")
-                                }
-                            }else if(arr.length === 0){
-                                console.log("Image absente")
-                            }else{
-                                console.log("Plus d'une image detecté !!")
-                            }
-                        })
-                    })
- 
-                })
-            })
-        })
+        dbImages.chargeImages()
+    })
+    .then(server.start())

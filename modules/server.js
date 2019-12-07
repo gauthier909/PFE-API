@@ -6,16 +6,22 @@ const https = require('https')
 const cors = require('cors')
 const router = express.Router()
 const io = require('socket.io')(8081)
-const db = require('./utils/db')
 const bodyParser= require('body-parser')
 require('dotenv').config()
 
+const db = require('./db')
 const routerAuth = require('../routes/auth')
 const routerEnfant = require('../routes/enfant')
 const routerPersonne = require('../routes/personne')
 const routerDefault = require('../routes/default')
 const routerPartie = require('../routes/partie')
 
+/**
+ * Variables
+ */
+
+const portHTTP = process.env.PORTHTTP
+const portHTTPS = process.env.PORTHTTPS
 
 app.use(cors())
 app.use(bodyParser.json())
@@ -50,7 +56,15 @@ app.use('/partie', routerPartie)
 
 app.use(routerDefault)
 
+const start = (callback) => {
+    http.createServer(app).listen(portHTTP, () => {
+        console.info(`[Server HTTP] Listening on ${portHTTP}`)
+        if (callback) callback(null)
+    })
+    https.createServer(app).listen(portHTTPS, () => {
+        console.info(`[Server HTTPS] Listening on ${portHTTPS}`)
+        if (callback) callback(null)
+    })
+}
 
-
-http.createServer(app).listen(8080)
-// https.createServer(app).listen(8433)
+module.exports.start = start
