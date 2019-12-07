@@ -11,14 +11,15 @@ const bodyParser= require('body-parser')
 require('dotenv').config()
 
 const routerAuth = require('../routes/auth')
-const routerEnfant = require('./routes/enfant')
-const routerPersonne = require('./routes/personne')
-const routerDefault = require('./routes/default')
-const routerPartie = require('./routes/partie')
+const routerEnfant = require('../routes/enfant')
+const routerPersonne = require('../routes/personne')
+const routerDefault = require('../routes/default')
+const routerPartie = require('../routes/partie')
+
+
 app.use(cors())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }));
-const constants = require("./models/modelJeux")
 
 db.connect()
 
