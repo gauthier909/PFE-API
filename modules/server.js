@@ -6,16 +6,16 @@ const proxy = require('http-proxy-middleware')
 const cors = require('cors')
 const router = express.Router()
 const io = require('socket.io')(8081)
-const db = require('./utils/db')
+const db = require('./db')
 require('dotenv').config()
 
-const routerEnfant = require('./routes/enfant')
-const routerPersonne = require('./routes/personne')
-const routerDefault = require('./routes/default')
+const routerEnfant = require('../routes/enfant')
+const routerPersonne = require('../routes/personne')
+const routerDefault = require('../routes/default')
 
 app.use(cors())
 
-const constants = require("./models/modelJeux")
+const constants = require("../models/modelJeux")
 
 db.connect()
 

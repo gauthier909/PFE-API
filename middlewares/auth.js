@@ -24,7 +24,7 @@ const authMiddleware = (req, res, next) => {
                     error: "Token has expired >.<"
                 })
             } else {
-                db.mongo.collection(constants.).findOne({
+                db.mongo.collection("").findOne({
                         _id: new db.ObjectID(decoded.user)
                     })
                     .then(user => {
