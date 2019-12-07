@@ -5,10 +5,17 @@ const db = require('../modules/db')
 router.get('/', () => {
     console.log("insertion");
     let collection = db.mongo.collection("images");
-    collection.insertOne({
-        nom:"./images/deplacements/bus.jpg",
+    /*collection.insertMany([
+        {
+        nom:"./images/deplacements/marcher.jpg",
         categorie:"deplacements"
-    })
+    },
+    {
+        nom:"./images/deplacements/traverser.jpg",
+        categorie:"deplacements"
+
+    }
+])*/
 });
 
 router.get('/jeu', () => {
@@ -16,7 +23,7 @@ router.get('/jeu', () => {
 })
 
 router.get('/images', function(req,res,next) {
-    db.db.collection('images').find().toArray().then((images)=>{
+    db.mongo.collection('images').find().toArray().then((images)=>{
         res.json(images);
         console.log(images);
     }).catch((err)=>{
