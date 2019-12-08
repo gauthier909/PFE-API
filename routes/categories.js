@@ -26,7 +26,7 @@ router.get('/', (req, res) => {
       .collection("images")
       .findOne({categorie:req.params.categorie})
       .then(image => {
-        console.log(image)
+        //console.log(image)
         res.json(image.nom);
       }).catch((err) => {
           res.status(500).send(err)
