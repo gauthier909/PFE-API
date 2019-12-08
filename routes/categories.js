@@ -20,7 +20,7 @@ router.get('/', (req, res) => {
   
 
   router.get('/cheminImage/:categorie', (req, res) => {
-    console.log("chemin image from API")
+    //console.log("chemin image from API")
     //console.log(req.params.categorie)
       db.mongo
       .collection("images")
