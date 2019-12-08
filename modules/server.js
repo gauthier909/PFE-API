@@ -18,6 +18,7 @@ const routerPartie = require('../routes/partie')
 const routerCategorie = require('../routes/categories')
 const routerBesoins = require('../routes/besoins')
 const routerRoles = require('../routes/roles')
+const routerFiltres = require('../routes/filtres')
 
 /**
  * Variables
@@ -39,6 +40,7 @@ app.use('/partie', routerPartie)
 app.use('/categories', routerCategorie)
 app.use('/besoins',routerBesoins)
 app.use('/roles',routerRoles)
+app.use('/filtres',routerFiltres)
 
 // io.on('test', (socket) => {
 //     console.log("Responding to test channel")
