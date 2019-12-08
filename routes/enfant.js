@@ -19,7 +19,7 @@ router.get('/', (req, res) => {
 })
 
 // /api/enfant/
-// Find all enfants
+// insert enfant
 router.post('/', (req, res) => {
   console.log("message on veut insert reçu")
   db.mongo.collection("enfants").insertOne(req.body).then((result) => {
@@ -41,7 +41,7 @@ router.get('/:id', (req, res) => {
     .findOne({ _id: new db.ObjectID(req.params.id) })
     .then(enfants => {
       res.json(enfants);
-      console.log(enfants.besoins)
+      console.log(enfants)
     }).catch((err) => {
       res.status(500).send(err)
     });
@@ -98,6 +98,7 @@ router.delete('/:id', function (req, res) {
       res.status(500).send(err)
     });
 });
+
 
 // /api/enfant/jeu
 router.get('/jeu', () => {
