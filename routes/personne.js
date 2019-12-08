@@ -37,7 +37,7 @@ router.post('/', (req, res) => {
     .findOne({_id: new db.ObjectID(req.params.id)})
     .then(personne => {
       res.json(personne);
-      console.log(personne)
+     
     }).catch((err) => {
     res.status(500).send(err)
   });
