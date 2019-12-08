@@ -18,6 +18,17 @@ router.get('/', () => {
 ])*/
 });
 
+//add filtre
+router.post('/filtre', (req, res) => {
+    //console.log('ajout filtre from API')
+    db.mongo.collection("filtres").insertOne(req.body).then((result) =>{
+      req.body._id = result.insertedId
+      res.json(req.body)
+    }).catch((err) => {
+      res.status(500).send(err)
+    });
+  });
+
 router.get('/jeu', () => {
     
 })
@@ -30,5 +41,8 @@ router.get('/images', function(req,res,next) {
         res.status(500).send(err);
     });
 });
+
+
+
 
 module.exports = router
