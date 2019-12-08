@@ -46,7 +46,22 @@ router.get('/:id', (req, res) => {
       res.status(500).send(err)
     });
 })
-
+/* 
+find an infant by name
+*/
+router.get('/nom/:nom', (req, res) => {
+  console.log("message tofind with name enfant reçu")
+  db.mongo
+    .collection("enfants")
+    .find({ nom: req.params.nom })
+    .toArray()
+    .then(enfants => {
+      res.json(enfants);
+      console.log(enfants)
+    }).catch((err) => {
+      res.status(500).send(err)
+    });
+})
 
 // Update an infant by ID
 router.put('/:id', function (req, res) {
