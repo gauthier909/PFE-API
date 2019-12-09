@@ -18,6 +18,17 @@ router.get('/', () => {
 ])*/
 });
 
+//add filtre
+router.post('/filtre', (req, res) => {
+    //console.log('ajout filtre from API')
+    db.mongo.collection("filtres").insertOne(req.body).then((result) =>{
+      req.body._id = result.insertedId
+      res.json(req.body)
+    }).catch((err) => {
+      res.status(500).send(err)
+    });
+  });
+
 router.get('/jeu', () => {
     
 })
@@ -30,5 +41,23 @@ router.get('/images', function(req,res,next) {
         res.status(500).send(err);
     });
 });
+
+
+router.get('/imagesCategorie/:categorie', (req, res) => {
+    //supprimer accent
+    console.log("chemin image by categorie from API")
+    console.log(req.params.categorie)
+      db.mongo
+      .collection("images")
+      .find({categorie:req.params.categorie})
+      .map(function(n){return n.nom})
+      .toArray()
+      .then(images => {
+         // console.log(images)
+        res.json(images);
+      }).catch((err) => {
+          res.status(500).send(err) 
+      });
+  })
 
 module.exports = router

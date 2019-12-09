@@ -3,25 +3,19 @@ const router = express.Router()
 const db = require('../modules/db')
 
 
-<<<<<<< HEAD
-// /api/enfant/
-// Find all besoins
-=======
-// /api/besoin/
-// Find all catégories
->>>>>>> 65f3fb695610238216bb7471d1c816ec1cdd8e5c
+// /api/filtres/
+// Find all filtres
 router.get('/', (req, res) => {
-    console.log("message get all Besoins reçu")
+    console.log("message get all filtres reçu")
       db.mongo
       .collection("liste-de-données")
-      .findOne({"type": "besoin"})
-      .then(besoin => {
-        res.json(besoin.besoin);
+      .findOne({"type": "filtres"})
+      .then(filtres => {
+        console.log(filtres.filtres);
+        res.json(filtres.filtres);
       }).catch((err) => {
           res.status(500).send(err)
       });
   })
-
-  
   
 module.exports = router

@@ -37,11 +37,27 @@ router.post('/', (req, res) => {
     .findOne({_id: new db.ObjectID(req.params.id)})
     .then(personne => {
       res.json(personne);
-      console.log(personne)
+     
     }).catch((err) => {
     res.status(500).send(err)
   });
   })
+/* 
+find a person by name
+*/
+router.get('/nom/:nom', (req, res) => {
+  console.log("message tofind with name personne reçu")
+  db.mongo
+    .collection("personnes")
+    .find({ nom: req.params.nom })
+    .toArray()
+    .then(personnes => {
+      res.json(personnes);
+      console.log(personnes)
+    }).catch((err) => {
+      res.status(500).send(err)
+    });
+})
 
 
   // Update personne by ID
