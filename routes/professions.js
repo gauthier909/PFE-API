@@ -3,18 +3,21 @@ const router = express.Router()
 const db = require('../modules/db')
 
 
-// /api/catégories/
-// Find all catégories
+// /api/professions/
+// Find all professions
 router.get('/', (req, res) => {
-    console.log("message get all dominances reçues")
+    console.log("message get all professions reçu")
       db.mongo
       .collection("liste-de-données")
-      .findOne({"type": "dominance"})
-      .then(dominance => {
-        res.json(dominance.dominance);
+      .findOne({"type": "profession"})
+      .then(professions => {
+        res.json(professions.profession);
       }).catch((err) => {
           res.status(500).send(err)
       });
   })
+
+  
+
   
 module.exports = router
