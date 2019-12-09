@@ -62,9 +62,9 @@ const chargeImages = () => {
                         }).toArray().then(arr => {
                             if (arr.length === 1) {
                                 if (arr[0].nom ===  '../.'+element.path + image) {
-                                    console.log("[OK]", element.path + image)
+                                    console.log("[IMAGE DANS DB]", element.path + image)
                                 } else {
-                                    console.log("pas ok ?")
+                                    console.log("Erreur, vérifier code")
                                 }
                             } else if (arr.length === 0) {
                                 console.log("[IMAGE ABSENTE]", element.path + image, " => INSERTION")
