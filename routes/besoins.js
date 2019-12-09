@@ -4,7 +4,7 @@ const db = require('../modules/db')
 
 
 // /api/enfant/
-// Find all catégories
+// Find all besoins
 router.get('/', (req, res) => {
     console.log("message get all Besoins reçu")
       db.mongo

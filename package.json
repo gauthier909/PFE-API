@@ -2,7 +2,7 @@
   "name": "pfe-api",
   "version": "1.0.0",
   "description": "backend",
-  "main": "./server.js",
+  "main": "./index.js",
   "dependencies": {
     "5no-crypt": "^1.0.2",
     "body-parser": "^1.19.0",
@@ -20,9 +20,7 @@
     "socket.io": "^2.3.0",
     "tslib": "^1.10.0"
   },
-  "devDependencies": {
-    "http-proxy-middleware": "^0.20.0"
-  },
+  "devDependencies": {},
   "scripts": {
     "start": "nodemon",
     "test": "test"
