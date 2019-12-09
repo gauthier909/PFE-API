@@ -17,7 +17,7 @@ const routerDefault = require('./routes/default')
 const routerPartie = require('./routes/partie')
 app.use(cors())
 app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: true }));
+
 const constants = require("./models/modelJeux")
 
 db.connect()
