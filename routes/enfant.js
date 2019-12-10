@@ -115,9 +115,5 @@ router.delete('/:id', function (req, res) {
 });
 
 
-// /api/enfant/jeu
-router.get('/jeu', () => {
-
-})
 
 module.exports = router
