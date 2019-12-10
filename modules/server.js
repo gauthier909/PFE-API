@@ -2,14 +2,15 @@ const express = require('express')
 const app = express()
 const http = require('http')
 const https = require('https')
-// const proxy = require('http-proxy-middleware')
 const cors = require('cors')
-const router = express.Router()
-const io = require('socket.io')(8081)
-const bodyParser= require('body-parser')
+const bodyParser = require('body-parser')
 require('dotenv').config()
 
 const db = require('./db')
+
+/**
+ * Routes
+ */
 const routerAuth = require('../routes/auth')
 const routerEnfant = require('../routes/enfant')
 const routerPersonne = require('../routes/personne')
@@ -22,6 +23,12 @@ const routerScolaritees = require('../routes/scolaritees')
 const routerRelations = require('../routes/relations')
 const routerRoles = require('../routes/roles')
 const routerFiltres = require('../routes/filtres')
+const routerImages = require('../routes/images')
+/**
+ * Sockets
+ */
+const ioJeux = require('../sockets/socketJeu')
+
 const routerProfessions = require('../routes/professions')
 
 /**
@@ -33,7 +40,9 @@ const portHTTPS = process.env.PORTHTTPS
 
 app.use(cors())
 app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
 
 db.connect()
 
@@ -49,26 +58,6 @@ app.use('/relations',routerRelations)
 app.use('/roles',routerRoles)
 app.use('/filtres',routerFiltres)
 app.use('/professions',routerProfessions)
-
-// io.on('test', (socket) => {
-//     console.log("Responding to test channel")
-//     socket.emit('attente', {hello: "hello from api !!"})
-// })
-//
-// io.on('connection', (socket) => {
-//     console.log("Connection established", socket.id)
-//     socket.join('room1', () => {
-//         let rooms = Object.keys(socket.rooms)
-//         console.log("ROOMS ! ", rooms, socket.rooms)
-//     })
-//     socket.in('room1').on('chat', (data) => {
-//         console.log("Sur le channet chat de room1 on a recu :", data)
-//         socket.to("room1").emit('chat', data)
-//     })
-//     socket.on('disconnect', () => {
-//         console.log("A user disconnected : ", socket.id)
-//     })
-// })
 
 app.use(routerDefault)
 
