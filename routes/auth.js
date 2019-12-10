@@ -10,7 +10,7 @@ const bodyParser= require('body-parser')
 const crypt = require('../middlewares/crypt')
 const jwt = require('jsonwebtoken')
 require('dotenv').config()
-router.post("/auth/login", function(req, res, next) {
+router.post("/login", function(req, res, next) {
     console.log(req.body);
     db.mongo.collection("personnes").findOne({ email: req.body.email }).then(user => {
         console.log(user+" avant if")
