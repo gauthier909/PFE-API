@@ -29,6 +29,7 @@ const routerImages = require('../routes/images')
  */
 const ioJeux = require('../sockets/socketJeu')
 
+const routerProfessions = require('../routes/professions')
 
 /**
  * Variables
@@ -50,13 +51,13 @@ app.use('/enfants', routerEnfant)
 app.use('/personne', routerPersonne)
 app.use('/partie', routerPartie)
 app.use('/categories', routerCategorie)
-app.use('/besoins', routerBesoins)
-app.use('/dominances', routerDominances)
-app.use('/scolaritees', routerScolaritees)
-app.use('/relations', routerRelations)
-app.use('/roles', routerRoles)
-app.use('/filtres', routerFiltres)
-app.use('/images', routerImages)
+app.use('/besoins',routerBesoins)
+app.use('/dominances',routerDominances)
+app.use('/scolaritees',routerScolaritees)
+app.use('/relations',routerRelations)
+app.use('/roles',routerRoles)
+app.use('/filtres',routerFiltres)
+app.use('/professions',routerProfessions)
 
 app.use(routerDefault)
 
