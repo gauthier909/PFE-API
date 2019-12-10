@@ -3,7 +3,7 @@ const app = express()
 const http = require('http')
 const https = require('https')
 const cors = require('cors')
-const bodyParser= require('body-parser')
+const bodyParser = require('body-parser')
 require('dotenv').config()
 
 const db = require('./db')
@@ -23,7 +23,7 @@ const routerScolaritees = require('../routes/scolaritees')
 const routerRelations = require('../routes/relations')
 const routerRoles = require('../routes/roles')
 const routerFiltres = require('../routes/filtres')
-
+const routerImages = require('../routes/images')
 /**
  * Sockets
  */
@@ -39,7 +39,9 @@ const portHTTPS = process.env.PORTHTTPS
 
 app.use(cors())
 app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
 
 db.connect()
 
@@ -48,12 +50,13 @@ app.use('/enfants', routerEnfant)
 app.use('/personne', routerPersonne)
 app.use('/partie', routerPartie)
 app.use('/categories', routerCategorie)
-app.use('/besoins',routerBesoins)
-app.use('/dominances',routerDominances)
-app.use('/scolaritees',routerScolaritees)
-app.use('/relations',routerRelations)
-app.use('/roles',routerRoles)
-app.use('/filtres',routerFiltres)
+app.use('/besoins', routerBesoins)
+app.use('/dominances', routerDominances)
+app.use('/scolaritees', routerScolaritees)
+app.use('/relations', routerRelations)
+app.use('/roles', routerRoles)
+app.use('/filtres', routerFiltres)
+app.use('/images', routerImages)
 
 app.use(routerDefault)
 

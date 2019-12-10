@@ -19,7 +19,6 @@ db.connect()
     .then(db => {
         let collection = db.collection(constants.TABLE_PERSONNES)
         collection.countDocuments().then(res => {
-            console.log('ok')
             if (res === 0) {
                 console.log('Inserting a default user')
                 let password = crypt.cryptPassword(constants.TABLE_PERSONNES_PASSWORD_ADMIN)
