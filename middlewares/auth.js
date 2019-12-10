@@ -1,10 +1,17 @@
 const jwt = require('jsonwebtoken')
-const db = require('../utils/db')
-const _ =  require('lodash')
-const router = require('express').Router()
-const jwtSecret = process.env.JWT_SECRET
-const collectionName = process.env.COLLECTION_NAME
+const db = require('../modules/db')
 const crypt = require('./crypt')
+
+const jwtSecret = process.env.JWT_SECRET
+const collectionPersonnes = process.env.COLLECTION_PERSONNES
+
+/**
+ * Authentication
+ * Create an authorization middleware to be used on the route to be secured
+ * @param {*} req
+ * @param {*} res 
+ * @param {*} next 
+ */
 const authMiddleware = (req, res, next) => {
     var token = req.get('authorization')
     if (!token) {
@@ -25,13 +32,13 @@ const authMiddleware = (req, res, next) => {
                     error: "Token has expired >.<"
                 })
             } else {
-                db.mongo.collection(collectionName).findOne({ // CHNAGERRRRRRRR
-                    _id: new db.ObjectID(decoded.user)
-                })
+                db.mongo.collection(collectionPersonnes).findOne({
+                        _id: new db.ObjectID(decoded.user)
+                    })
                     .then(user => {
-                        if(err || !user){
+                        if (err || !user) {
                             res.status(500).send(err)
-                        }else{
+                        } else {
                             delete user.password
                             req.user = user
                             req.token = decoded
@@ -43,6 +50,13 @@ const authMiddleware = (req, res, next) => {
     }
 }
 
+/**
+ * Logger
+ */
+const loggerMiddleware = (req, res, next) => {
+    console.log(`[${req.method}] ${req.url}`)
+    next()
+}
 
-
-exports.AuthMiddleware=authMiddleware;
+exports.loggerMiddleware = loggerMiddleware
+exports.authMiddleware = authMiddleware;
