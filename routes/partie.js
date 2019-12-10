@@ -17,7 +17,9 @@ router.get('/', () => {
     }
 ])*/
 });
-
+router.get('/:id', () => {
+    console.log(req.body)
+});
 //add filtre
 router.post('/filtre', (req, res) => {
     //console.log('ajout filtre from API')

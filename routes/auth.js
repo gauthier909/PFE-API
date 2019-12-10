@@ -1,14 +1,20 @@
 const app=require('express')
 const router=app.Router()
 const _ =  require('lodash')
+
+
+
+
 const db = require('../modules/db')
 const bodyParser= require('body-parser')
+
 const crypt = require('../middlewares/crypt')
 const jwt = require('jsonwebtoken')
 require('dotenv').config()
-router.post("/auth/login", function(req, res, next) {
+router.post("/login", function(req, res, next) {
     console.log(req.body);
     db.mongo.collection("personnes").findOne({ email: req.body.email }).then(user => {
+        console.log(user+" avant if")
         if (user) {
             console.log("my request "+req.body.password);
                 console.log(user+"mon user")
@@ -54,6 +60,7 @@ router.post('/register',function (req , res, next) {
             db.mongo.collection("personnes").insertOne(usr).then(res => {
                 res.status(200);
             }).catch(err => {
+                console.log(err)
                 res.status(500).json({ success: false, error: "Unable to insert user into DB" })})
         }
     })
