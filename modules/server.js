@@ -84,11 +84,11 @@ app.use('/jeux', routerJeux)
 app.use(routerDefault)
 
 const start = (callback) => {
-    http.createServer(app).listen(portHTTP, () => {
+    http.createServer(app).listen(portHTTP || 5000, () => {
         console.info(`[Server HTTP] Listening on ${portHTTP}`)
         if (callback) callback(null)
     })
-    https.createServer(app).listen(portHTTPS, () => {
+    https.createServer(app).listen(portHTTPS || 5000, () => {
         console.info(`[Server HTTPS] Listening on ${portHTTPS}`)
         if (callback) callback(null)
     })
