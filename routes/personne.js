@@ -17,6 +17,20 @@ router.get('/', (req,res) => {
 	});
 })
 
+//find all personnes
+router.get('/professionnels', (req,res) => {
+  console.log('message get prof')
+  db.mongo
+  .collection("personnes")
+  .find({role: "Professionnel"})
+  .toArray()
+  .then(personnes => {
+    res.json(personnes);
+  }).catch((err) => {
+  res.status(500).send(err)
+});
+})
+
 //add personne
 router.post('/', (req, res) => {
     console.log("debut insertion personne")

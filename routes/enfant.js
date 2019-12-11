@@ -18,6 +18,21 @@ router.get('/', (req, res) => {
     });
 })
 
+router.get('/pro/:id', (req, res) => {
+  console.log("message vers enfant recu pro")
+  db.mongo
+    .collection("enfants")
+    .find({professionnel:req.params.id})
+    .toArray()
+    .then(enfants => {
+      res.json(enfants);
+    }).catch((err) => {
+      res.status(500).send(err)
+    });
+})
+
+
+
 // /api/enfant/
 // insert enfant
 router.post('/', (req, res) => {
