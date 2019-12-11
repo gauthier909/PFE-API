@@ -24,7 +24,7 @@
   },
   "devDependencies": {},
   "scripts": {
-    "start": "node index.js",
+    "start": "nodemon",
     "test": "test"
   },
   "repository": {
