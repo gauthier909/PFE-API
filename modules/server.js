@@ -56,8 +56,8 @@ app.use(bodyParser.urlencoded({
 /**
  * Use des Middlewares
  */
-app.use(loggerMiddleware)
-app.use(authMiddleware)
+// app.use(loggerMiddleware)
+// app.use(authMiddleware)
 
 
 /**
