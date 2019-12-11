@@ -16,6 +16,7 @@ const routerPersonne = require('./routes/personne')
 const routerDefault = require('./routes/default')
 const routerPartie = require('./routes/partie')
 const routerJeux = require('./routes/jeux')
+
 app.use(cors())
 app.use(bodyParser.json())
 
@@ -28,6 +29,7 @@ app.use('/enfants', routerEnfant)
 app.use('/personne', routerPersonne)
 app.use('/partie', routerPartie)
 app.use('/jeux', routerJeux)
+
 
 // io.on('test', (socket) => {
 //     console.log("Responding to test channel")
