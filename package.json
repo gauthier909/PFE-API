@@ -24,7 +24,8 @@
   },
   "devDependencies": {},
   "scripts": {
-    "start": "nodemon",
+    "start": "node server.js",
+    "postinstall": "npm run build",
     "test": "test"
   },
   "repository": {
