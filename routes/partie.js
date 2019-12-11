@@ -3,19 +3,7 @@ const router = express.Router()
 const db = require('../modules/db')
 
 router.get('/', () => {
-    console.log("insertion");
-    let collection = db.mongo.collection("images");
-    /*collection.insertMany([
-        {
-        nom:"./images/deplacements/marcher.jpg",
-        categorie:"deplacements"
-    },
-    {
-        nom:"./images/deplacements/traverser.jpg",
-        categorie:"deplacements"
 
-    }
-])*/
 });
 router.get('/:id', () => {
     console.log(req.body)
@@ -30,6 +18,37 @@ router.post('/filtre', (req, res) => {
       res.status(500).send(err)
     });
   });
+
+  router.put('/filtre', function(req, res) {
+    console.log("update jeu from API")
+  });
+  //add filtre to table jeu
+  
+  router.put('/filtre/:id', function(req, res) {
+    //console.log("update jeu from API")
+    //console.log(req.body)
+    let choixTemp = req.body.choix
+    let nomImageTemp=choixTemp.nomImage
+    let valeurTemp = choixTemp.valeur
+    let objetFinal={
+      commentaire:req.body.commentaire,
+      nom:req.body.nom,
+      nomImage:nomImageTemp,
+      valeur:valeurTemp
+    }
+    db.mongo
+    .collection("jeux")
+    .findOneAndUpdate({_id: new db.ObjectID(req.params.id)}, {$push: {"choix":objetFinal}}, {returnOriginal: false})
+    .then((result) => {
+          if (result.value) {
+              res.json(result.value)
+          } else {
+              res.status(404).send()
+          }
+      }).catch((err) => {
+          res.status(500).send(err)
+      });
+  }); 
 
 router.get('/jeu', () => {
     
