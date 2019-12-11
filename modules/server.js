@@ -8,8 +8,9 @@ require('dotenv').config()
 
 const db = require('./db')
 
+
 /**
- * Routes
+ * Import Routes
  */
 const routerAuth = require('../routes/auth')
 const routerEnfant = require('../routes/enfant')
@@ -28,11 +29,17 @@ const routerDemandeur = require('../routes/demandeurs')
 const routerJeux = require('../routes/jeux')
 
 /**
- * Sockets
+ * Import Sockets
  */
 const ioJeux = require('../sockets/socketJeu')
 
 const routerProfessions = require('../routes/professions')
+
+/**
+ * Import middlewares
+ */
+const loggerMiddleware = require('../middlewares/auth').loggerMiddleware
+const authMiddleware = require('../middlewares/auth').authMiddleware
 
 /**
  * Variables
@@ -41,14 +48,24 @@ const routerProfessions = require('../routes/professions')
 const portHTTP = process.env.PORTHTTP
 const portHTTPS = process.env.PORTHTTPS
 
+
+
 app.use(cors())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({
     extended: true
 }));
 
-db.connect()
+/**
+ * Use des Middlewares
+ */
+// app.use(loggerMiddleware)
+// app.use(authMiddleware)
 
+
+/**
+ * Use des Routes
+ */
 app.use('/', routerAuth)
 app.use('/enfants', routerEnfant)
 app.use('/personne', routerPersonne)
