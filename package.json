@@ -24,7 +24,7 @@
   },
   "devDependencies": {},
   "scripts": {
-    "start": "node server.js",
+    "start": "node index.js",
     "postinstall": "npm run build",
     "test": "test"
   },
