@@ -2,8 +2,6 @@ const express = require('express')
 const router = express.Router()
 const db = require('../modules/db')
 
-
-
 // /jeux/
 // Find all jeux
 router.get('/', (req, res) => {
@@ -18,6 +16,16 @@ router.get('/', (req, res) => {
         res.status(500).send(err)
       });
   })
+
+  router.post('/', (req, res) => {
+    console.log("message on veut insert partie reçu")
+    db.mongo.collection("jeux").insertOne(req.body).then((result) => {
+      req.body._id = result.insertedId
+      res.json(req.body)
+    }).catch((err) => {
+      res.status(500).send(err)
+    });
+  });
 
 
   // /jeux/
@@ -68,6 +76,8 @@ router.get('/enfant/:nom', (req, res) => {
         res.status(500).send(err)
       });
   })
+
+
 
 // Update a jeu by ID
 router.put('/:id', function (req, res) {

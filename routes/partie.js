@@ -2,6 +2,8 @@ const express = require('express')
 const router = express.Router()
 const db = require('../modules/db')
 
+
+
 router.get('/', () => {
     console.log("insertion");
     let collection = db.mongo.collection("images");

@@ -25,6 +25,9 @@ const routerRelations = require('../routes/relations')
 const routerRoles = require('../routes/roles')
 const routerFiltres = require('../routes/filtres')
 const routerImages = require('../routes/images')
+const routerDemandeur = require('../routes/demandeurs')
+const routerJeux = require('../routes/jeux')
+
 /**
  * Import Sockets
  */
@@ -75,6 +78,8 @@ app.use('/relations',routerRelations)
 app.use('/roles',routerRoles)
 app.use('/filtres',routerFiltres)
 app.use('/professions',routerProfessions)
+app.use('/demandeurs',routerDemandeur)
+app.use('/jeux', routerJeux)
 
 app.use(routerDefault)
 
