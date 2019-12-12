@@ -84,7 +84,7 @@ app.use('/jeux', routerJeux)
 app.use(routerDefault)
 
 const start = (callback) => {
-    http.createServer(app).listen(portHTTP || 8080, () => {
+    http.createServer(app).listen(process.env.PORT || 8080, () => {
         console.info(`[Server HTTP] Listening on ${portHTTP}`)
         if (callback) callback(null)
     })
