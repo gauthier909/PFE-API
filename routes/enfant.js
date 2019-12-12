@@ -46,9 +46,9 @@ router.post('/', (req, res) => {
 });
 
 
-/* 
-find an infant by id
-*/
+/**
+ * find an enfant by id
+ */
 router.get('/:id', (req, res) => {
   console.log("message tofind with ID enfant reçu")
   db.mongo
@@ -61,8 +61,8 @@ router.get('/:id', (req, res) => {
       res.status(500).send(err)
     });
 })
-/* 
-find an infant by name
+/**
+* find an enfant by name
 */
 router.get('/nom/:nom', (req, res) => {
   console.log("message tofind with name enfant reçu")
@@ -78,7 +78,7 @@ router.get('/nom/:nom', (req, res) => {
     });
 })
 
-// Update an infant by ID
+// Update an enfant by ID
 router.put('/:id', function (req, res) {
   console.log("message update reçu")
 

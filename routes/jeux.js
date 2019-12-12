@@ -75,32 +75,35 @@ router.get('/enfant/:nom', (req, res) => {
     })
     .toArray()
     .then(jeux => {
-      res.json(jeu);
+      res.json(jeux);
     }).catch((err) => {
       res.status(500).send(err)
     });
 })
 
-
+// export class Jeu {
+//   _id: string
+//   date: string
+//   demande: string
+//   idEnfant: string
+//   idProfessionnel: string
+//   filtresPartie: Filtre[]
+//   choix: Choix[]
+// }
 
 // Update a jeu by ID
 router.put('/:id', function (req, res) {
   console.log("message update jeux reçu")
 
-  console.log(req.body._id)
+  console.log(req.body._id, req.body)
   delete req.body._id;
-  console.log(req.body.besoins);
   db.mongo
     .collection("jeux")
     .findOneAndUpdate({
       _id: new db.ObjectID(req.params.id)
     }, {
       $set: {
-        "demandeur": req.body.nom,
-        "mandat": req.body.mandat,
-        "nom_enfant": req.body.nomEnfant,
-        "enfant": req.body.enfant,
-        "professionnel": req.body.professionnel
+        "choix": req.body.choix
       }
     }, {
       returnOriginal: false
