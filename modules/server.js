@@ -28,11 +28,6 @@ const routerImages = require('../routes/images')
 const routerDemandeur = require('../routes/demandeurs')
 const routerJeux = require('../routes/jeux')
 
-/**
- * Import Sockets
- */
-const ioJeux = require('../sockets/socketJeu')
-
 const routerProfessions = require('../routes/professions')
 
 /**
@@ -40,15 +35,6 @@ const routerProfessions = require('../routes/professions')
  */
 const loggerMiddleware = require('../middlewares/auth').loggerMiddleware
 const authMiddleware = require('../middlewares/auth').authMiddleware
-
-/**
- * Variables
- */
-
-const portHTTP = process.env.PORTHTTP
-const portHTTPS = process.env.PORTHTTPS
-
-
 
 app.use(cors())
 app.use(bodyParser.json())
@@ -84,14 +70,17 @@ app.use('/jeux', routerJeux)
 app.use(routerDefault)
 
 const start = (callback) => {
-    http.createServer(app).listen(process.env.PORT || 8080, () => {
-        console.info(`[Server HTTP] Listening on ${portHTTP}`)
+    http.createServer(app).listen(process.env.PORT || 8080, () => {    // process.env.PORT is specified by heroku
+        console.info(`[Server HTTP] Listening on ${app.get('port')}`)
         if (callback) callback(null)
     })
-    https.createServer(app).listen(portHTTPS || 8433, () => {
-        console.info(`[Server HTTPS] Listening on ${portHTTPS}`)
-        if (callback) callback(null)
-    })
+    
+    // https.createServer(app).listen(8433, () => { 
+    //     console.info(`[Server HTTPS] Listening on ${portHTTPS}`)
+    //     if (callback) callback(null)
+    // })
 }
+
+// const ioJeux = require('../sockets/socketJeu')
 
 module.exports.start = start

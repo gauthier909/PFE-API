@@ -1,5 +1,5 @@
-const io = require('socket.io')(process.env.SOCKETHTTP)
-console.log("[SOCKET] Port : ", process.env.SOCKETHTTP)
+const io = require('socket.io')(8081)
+console.log("[SOCKET] Port : ", 8081)
 let rooms = []
 
 io.on('connection', (socket) => {
