@@ -69,9 +69,41 @@ app.use('/jeux', routerJeux)
 
 app.use(routerDefault)
 
+
 const start = (callback) => {
-    http.createServer(app).listen(process.env.PORT || 8080, () => {    // process.env.PORT is specified by heroku
-        console.info(`[Server HTTP] Listening on ${app.get('port')}`)
+    var server = http.createServer(app)
+    const io = require('socket.io').listen(server)
+    let rooms = []
+
+    io.on('connection', (socket) => {
+        console.log("[SOCKET] Connection established", rooms)
+        socket.on('getRooms', () => {
+            console.log('[SOCKET] Les rooms ont été demandé' )
+            socket.emit('getRooms', rooms)
+        })
+        socket.on('joinRoom', room => {
+            console.log('[SOCKET] Join d\' une room demandé :', room)
+
+            if(rooms.indexOf(room) == -1){
+                rooms.push(room)
+            }
+            socket.join(room)
+        })
+
+        socket.on("message", ({
+            room,
+            message
+        }) => {
+            console.log("[SOCKET] Message", room, message)
+            socket.to(room).emit("message", {
+                message,
+            })
+
+        })
+    })
+
+    server.listen(process.env.PORT || 8080, () => {    // process.env.PORT is specified by heroku
+        console.info(`[Server HTTP] Listening on ${process.env.PORT} (production) OR 8080 (dev)`)
         if (callback) callback(null)
     })
     
